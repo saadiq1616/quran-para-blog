@@ -147,7 +147,6 @@ footer a{color:var(--gold);text-decoration:none;}
     <button class="ask-nav-btn" onclick="openAsk()">🤔 Sawaal Poochho</button>
   </div>
 </div>
-
 <section id="hero">
   <div class="arabic-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
   <h1>Quran Ke 30 Para</h1>
@@ -163,7 +162,6 @@ footer a{color:var(--gold);text-decoration:none;}
     <button class="btn-secondary" onclick="openAsk()">🤔 AI Se Sawaal Karo</button>
   </div>
 </section>
-
 <div id="para-nav">
   <button class="pnav-btn active" onclick="filterNav('all',this)">Sab</button>
   <button class="pnav-btn" onclick="filterNav('1',this)">P1</button>
@@ -197,7 +195,6 @@ footer a{color:var(--gold);text-decoration:none;}
   <button class="pnav-btn" onclick="filterNav('29',this)">P29</button>
   <button class="pnav-btn" onclick="filterNav('30',this)">P30</button>
 </div>
-
 <div id="main">
   <div class="sec-head" id="paras-sec">
     <h2>Tammam 30 Para — Ek Nazar Mein</h2>
@@ -206,7 +203,6 @@ footer a{color:var(--gold);text-decoration:none;}
   </div>
   <div id="para-grid"></div>
 </div>
-
 <div id="ask-panel">
   <div class="ask-inner">
     <div class="ask-hero-bar">
@@ -249,7 +245,6 @@ footer a{color:var(--gold);text-decoration:none;}
     </div>
   </div>
 </div>
-
 <div id="blog-modal">
   <div class="bm-inner">
     <div class="bm-hero">
@@ -261,7 +256,6 @@ footer a{color:var(--gold);text-decoration:none;}
     <div class="bm-body" id="bm-body"></div>
   </div>
 </div>
-
 <footer>
   🌙 Quran Ke 30 Para — Banaya gaya hai <span>seekhne aur samajhne</span> ke liye &nbsp;|&nbsp;
   Quran Ki Baat, Dil Ki Zuban Mein
@@ -316,19 +310,7 @@ const paras = [
     </div>`).join("");
 }
 renderGrid(paras);
-
-function isQuestion(q){
-  const ql=q.toLowerCase();
-  const qwords=["kya","kyun","kaise","kaun","kab","kis","kitna","kitni","kyon","why","how","what","who","when","?"];
-  if(q.length>30) return true;
-  if(qwords.some(w=>ql.startsWith(w)||ql.includes(" "+w))) return true;
-  if(q.includes("?")) return true;
-  return false;
-}
-
-let searchTimer=null;
-function onSearch(q){
-  clearTimeout(searchTimer);
+  function onSearch(q){
   const raw=q.trim();
   if(!raw){renderGrid(paras);return;}
   const ql=raw.toLowerCase();
@@ -343,11 +325,11 @@ function onSearch(q){
     p.lessons.some(l=>l.toLowerCase().includes(ql))
   );
   renderGrid(matched);
-  setTimeout(()=>document.getElementById("paras-sec").scrollIntoView({behavior:"smooth",block:"start"}),100);
-  if(isQuestion(raw)&&matched.length<3){
-    searchTimer=setTimeout(()=>{openAskWithQ(raw);},600);
-  }
+  setTimeout(()=>document.getElementById("paras-sec")
+    .scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
+function isQuestion(q){
+  const ql=q.toLowerCase();
 
 function openAskWithQ(q){
   document.getElementById("ask-q").value=q;
