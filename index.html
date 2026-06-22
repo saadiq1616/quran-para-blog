@@ -213,3 +213,130 @@ const paras = [
   {num:30,title:"Amma Yatasaa'aloon – Quran Ka Aakhri Khazana",sub:"Al-Mulk se An-Naas tak — 37 Surahin",surahs:"Al-Mulk, Al-Ikhlas, Al-Falaq, An-Naas, Ad-Duha + 33 aur",tags:["Al-Ikhlas","Al-Falaq","Ad-Duha","Maut"],summary:"Chhoti surahin, gehri baat — maut, qayamat, dua, tawheed — har surah ek poora lecture.",chars:["Nabi PBUH","Abu Lahab","Bilal RA (ishara)","Firaun","Qayamat ke log"],time:"Zyaadatar Makkah daur — Nabi PBUH ke shuruwaati waqt.",story:["30vaan para chhoti surahin ka khazana hai — par gehraai bahut badi. Al-Mulk: 'Barkat waala hai woh jis ke haath mein poori hukumat hai — woh har cheez par qaadir hai. Jis ne maut aur zindagi banaayi — taake tumhein azmaaye ke tum mein se achhey amal wala kaun hai.' Maut ko Allah ne banaya — koi cheez nahi — ek reality. Maut ke baad kya hoga isi surah mein: 'Kya tum dar rahe nahi ke jis ne aasmaan ke upar hai woh tumhein zameen mein dhansa de?'","Ad-Duha: Nabi PBUH ke liye ek khubsoorat soorat — jab wahi ruki — woh udaas the. Allah ne farmaya: 'Teri Rabb ne tujhe nahi chhhoda aur nahi na-pasand kiya. Aakhirat tere liye pehli zindagi se behtar hai. Aur teri Rabb tujhe itna dega ke tu khush ho jaayega. Kya usne tujhe yateem na paaya aur panaah di? Kya usne tujhe bewaqoof nahi paaya aur seedha raasta dikhaya? Kya usne tujhe mohitaj nahi paaya aur ghani kiya? Toh yateem par sakhti mat karo — maangne waale ko jhidko mat — aur apne Rabb ki neematon ka charcha karo.'","Al-Ikhlas — 4 aayaten — tawheed ka mukammal aqeedah: 'Kaho: Woh Allah ek hai. Allah bepar taab hai. Na kisi ka baap na kisi ki aulad. Aur koi us ke barabar nahi.' Nabi PBUH ne farmaya: 'Yeh Quran ka ek tihaai hai.' Tin baar padhna ek khatm ke barabar. Al-Falaq aur An-Naas — hifazat ki dua: 'Main panaah maangta hoon fajr ke Rabb ki — jo usne banaya us ki burai se, raat ki taraiki ki burai se jab woh chaai, gandhan maarne waaliyoon ki burai se, aur hasid ki burai se jab woh hasad kare.'","Abu Lahab — Nabi PBUH ka chacha jo dushman tha — ek poori surah: 'Abu Lahab ke haath toot gaye — woh tabah ho gaya. Na kaam aaya uska maal na jo usne kamaya.' Yeh surah Nabi PBUH ki nabuwwat ke pehle saalon mein aayi — 10-12 saal pehle. Waada tha ke Abu Lahab Muslim nahi hoga. Woh haqeeqat mein Muslim nahi hua — Quran ka mojiza."],msg:"Quran ki shuruwat Bismillah se — aakhir Naas par — poori zindagi Allah ke naam se, uski panaah mein.",imp:"30vaan para sabse zyada hafizaan ke paas — chhoti surahin magar gehraai bahut badi. Har surah ek mukammal dars.",lessons:["Al-Ikhlas teen baar padhna Quran ka ek tihaayi — roz padhne ki aadat banao.","Al-Falaq aur An-Naas subah sham teen teen baar — nazar, jaadu, hasad sab se hifazat.","Ad-Duha — jab mushkil waqt aaye padho — Allah keh raha hai: Maine nahi chhoda tujhe.","Al-Asr — 3 aayatein mein poora falsafa: waqt, iman, amal, sabr."],myths:[{m:"Chhoti surahin badi surahin se kam important ya fazeelat waali hain.",t:"Al-Ikhlas ka sawab Quran ke ek tihaayi ke barabar hai. Chhoti magar tamaam. Gehraai size se nahi naapi jaati."},{m:"Abu Lahab wali surah sirf personal dushmani thi — koi ilmi point nahi.",t:"Yeh Quran ka azeem mojiza hai — 10-12 saal pehle predict kiya ke woh Muslim nahi hoga. Woh haqeeqat mein nahi hua. Yeh tasdeeq Quran ki sachchi nishani hai."}]}
 ];
       
+function renderGrid(data){
+  const g=document.getElementById("para-grid");
+  const si=document.getElementById("search-info");
+  if(!data.length){
+    g.innerHTML='<div class="no-results">🔍 Koi nateeja nahi mila — kuch aur try karo.</div>';
+    si.style.display='none';
+    return;
+  }
+  g.innerHTML=data.map(p=>`
+    <div class="para-card" onclick="openBlog(${p.num})">
+      <div class="pc-top">
+        <div class="pc-num">${p.num}</div>
+        <div class="pc-title"><h3>${p.title}</h3><span>${p.surahs}</span></div>
+      </div>
+      <div class="pc-body">${p.summary}</div>
+      <div class="pc-foot">
+        ${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}
+        <button class="read-btn">📖 Padho</button>
+      </div>
+    </div>`).join("");
+}
+renderGrid(paras);
+
+function onSearch(q){
+  const raw=q.trim();
+  const si=document.getElementById("search-info");
+  if(!raw){
+    renderGrid(paras);
+    si.classList.remove("show");
+    return;
+  }
+  const ql=raw.toLowerCase();
+  const matched=paras.filter(p=>
+    String(p.num).includes(ql)||
+    p.title.toLowerCase().includes(ql)||
+    p.sub.toLowerCase().includes(ql)||
+    p.summary.toLowerCase().includes(ql)||
+    p.story.join(" ").toLowerCase().includes(ql)||
+    p.tags.some(t=>t.toLowerCase().includes(ql))||
+    p.chars.some(c=>c.toLowerCase().includes(ql))||
+    p.lessons.some(l=>l.toLowerCase().includes(ql))
+  );
+  renderGrid(matched);
+  si.innerHTML=matched.length
+    ?`<span>${matched.length}</span> nateeja mila "<span>${raw}</span>" ke liye`
+    :`"<span>${raw}</span>" ka koi nateeja nahi mila`;
+  si.classList.add("show");
+  setTimeout(()=>document.getElementById("paras-sec")
+    .scrollIntoView({behavior:"smooth",block:"start"}),100);
+}
+
+function filterNav(val,btn){
+  document.querySelectorAll(".pnav-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("search-global").value="";
+  document.getElementById("search-info").classList.remove("show");
+  if(val==="all"){renderGrid(paras);}
+  else{renderGrid(paras.filter(p=>String(p.num)===val));}
+  document.getElementById("paras-sec").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function openBlog(num){
+  const p=paras.find(x=>x.num===num);
+  document.getElementById("bm-num").textContent="Para "+p.num;
+  document.getElementById("bm-title").textContent=p.title;
+  document.getElementById("bm-sub").textContent=p.sub;
+  document.getElementById("bm-body").innerHTML=`
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">📜</div><h4>Surahin Is Para Mein</h4></div>
+      <p><strong>${p.surahs}</strong></p>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">👤</div><h4>Kirdar (Characters)</h4></div>
+      <ul>${p.chars.map(c=>`<li>${c}</li>`).join("")}</ul>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">⏰</div><h4>Kab Hua — Zamana</h4></div>
+      <p>${p.time}</p>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">📖</div><h4>Poori Kahani</h4></div>
+      <div class="story-block">
+        ${p.story.map(para=>`<p>${para}</p>`).join("")}
+      </div>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">💬</div><h4>Paigham</h4></div>
+      <div class="bm-highlight">${p.msg}</div>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">⭐</div><h4>Kyun Zaroori Hai</h4></div>
+      <p>${p.imp}</p>
+    </div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">🎯</div><h4>Kya Seekhein</h4></div>
+      <ul>${p.lessons.map(l=>`<li>${l}</li>`).join("")}</ul>
+    </div>
+    <div class="bm-div"></div>
+    <div class="bsec">
+      <div class="bsec-hd"><div class="bsec-icon">🚫</div><h4>Myths vs Haqeeqat</h4></div>
+      ${p.myths.map(m=>`
+        <div class="myth-card">
+          <strong>❌ Myth: ${m.m}</strong>
+          <div class="truth">✅ Haqeeqat: ${m.t}</div>
+        </div>`).join("")}
+    </div>
+    <div class="bm-nav">
+      <button class="bm-nav-btn" onclick="openBlog(${num-1})" ${num<=1?"disabled":""}>← Para ${num-1}</button>
+      <button class="bm-nav-btn bm-nav-close" onclick="closeBlog()">✕ Band Karo</button>
+      <button class="bm-nav-btn" onclick="openBlog(${num+1})" ${num>=30?"disabled":""}>Para ${num+1} →</button>
+    </div>`;
+  document.getElementById("blog-modal").classList.add("open");
+  document.body.style.overflow="hidden";
+  document.querySelector(".bm-inner").scrollTop=0;
+}
+
+function closeBlog(){
+  document.getElementById("blog-modal").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+document.getElementById("blog-modal").addEventListener("click",e=>{
+  if(e.target===document.getElementById("blog-modal"))closeBlog();
+});
+</script>
+</body>
+</html>
