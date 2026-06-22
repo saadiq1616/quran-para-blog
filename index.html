@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌙 Quran Ke 30 Para – Hinglish Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold2:#E8C97A;--deep:#0A1628;--teal:#0E6B72;--cream:#FDF8EF;--text:#1A1A2E;--muted:#5A6478;--border:#DDD0B3;--nav-h:58px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);line-height:1.7;}
+#topbar{background:var(--deep);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:fixed;top:0;left:0;right:0;z-index:300;box-shadow:0 2px 20px rgba(0,0,0,.35);}
+.logo{color:var(--gold);font-size:1.1rem;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo span{color:white;font-weight:300;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+#search-global{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;padding:7px 14px;border-radius:20px;font-size:.82rem;width:240px;outline:none;font-family:'Inter',sans-serif;transition:all .2s;}
+#search-global::placeholder{color:rgba(255,255,255,.5);}
+#search-global:focus{border-color:var(--gold);width:280px;background:rgba(255,255,255,.15);}
+#hero{background:linear-gradient(160deg,var(--deep) 0%,#0D2244 50%,var(--teal) 100%);padding:120px 28px 70px;text-align:center;position:relative;overflow:hidden;margin-top:var(--nav-h);}
+#hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.05'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3C/g%3E%3C/svg%3E");}
+.arabic-hero{font-family:'Amiri',serif;font-size:2.4rem;color:var(--gold);position:relative;margin-bottom:18px;letter-spacing:4px;}
+#hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:700;color:white;position:relative;line-height:1.2;}
+#hero .tagline{color:rgba(255,255,255,.65);font-size:1.05rem;font-weight:300;margin-top:12px;position:relative;}
+.hero-stats{display:flex;justify-content:center;gap:40px;margin-top:36px;position:relative;flex-wrap:wrap;}
+.stat .n{font-size:2rem;font-weight:700;color:var(--gold);font-family:'Amiri',serif;}
+.stat .l{font-size:.78rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap;position:relative;}
+.btn-primary{background:var(--gold);color:var(--deep);border:none;padding:13px 30px;border-radius:28px;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px);}
+#para-nav{background:var(--deep);padding:0 20px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:var(--nav-h);z-index:200;}
+#para-nav::-webkit-scrollbar{display:none;}
+.pnav-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.55);padding:14px 11px;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:'Inter',sans-serif;}
+.pnav-btn:hover{color:white;}
+.pnav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+#main{max-width:1260px;margin:0 auto;padding:50px 24px 80px;}
+.sec-head{margin-bottom:36px;}
+.sec-head h2{font-size:1.65rem;font-weight:700;color:var(--deep);}
+.sec-head p{color:var(--muted);margin-top:6px;font-size:.94rem;}
+.sec-line{width:50px;height:3px;background:var(--gold);margin-top:12px;border-radius:2px;}
+.search-info{background:white;border:1px solid var(--border);border-radius:10px;padding:12px 18px;margin-bottom:24px;font-size:.88rem;color:var(--muted);display:none;}
+.search-info.show{display:block;}
+.search-info span{color:var(--teal);font-weight:700;}
+#para-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;}
+.no-results{text-align:center;padding:70px 20px;color:var(--muted);font-size:.97rem;grid-column:1/-1;}
+.para-card{background:white;border-radius:14px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;display:flex;flex-direction:column;}
+.para-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:var(--gold);}
+.pc-top{background:linear-gradient(135deg,var(--deep) 0%,var(--teal) 100%);padding:20px 22px 16px;display:flex;align-items:center;gap:14px;}
+.pc-num{width:46px;height:46px;background:var(--gold);color:var(--deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;flex-shrink:0;font-family:'Amiri',serif;}
+.pc-title h3{font-size:.95rem;color:white;font-weight:600;line-height:1.35;}
+.pc-title span{font-size:.75rem;color:rgba(255,255,255,.55);display:block;margin-top:3px;}
+.pc-body{padding:14px 18px 10px;font-size:.86rem;color:var(--muted);line-height:1.65;flex:1;}
+.pc-foot{padding:10px 18px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;border-top:1px solid #F5EDD8;}
+.tag{background:#EFF9FA;color:var(--teal);font-size:.67rem;font-weight:700;padding:3px 9px;border-radius:12px;text-transform:uppercase;letter-spacing:.4px;}
+.read-btn{margin-left:auto;background:var(--gold);color:var(--deep);border:none;padding:6px 16px;border-radius:20px;font-weight:700;font-size:.78rem;cursor:pointer;transition:background .18s;white-space:nowrap;}
+.read-btn:hover{background:var(--gold2);}
+#blog-modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,22,40,.7);backdrop-filter:blur(4px);overflow-y:auto;padding:28px 14px;}
+#blog-modal.open{display:block;}
+.bm-inner{background:var(--cream);max-width:860px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.4);}
+.bm-hero{background:linear-gradient(135deg,var(--deep) 0%,var(--teal) 100%);padding:44px 44px 36px;position:relative;}
+.bm-badge{display:inline-block;background:var(--gold);color:var(--deep);font-weight:700;font-size:.88rem;padding:4px 18px;border-radius:20px;margin-bottom:14px;}
+.bm-hero h2{font-size:clamp(1.5rem,4vw,2.1rem);color:white;font-weight:700;line-height:1.25;}
+.bm-hero .bmsub{color:rgba(255,255,255,.6);margin-top:8px;font-size:.88rem;}
+.close-bm{position:absolute;top:14px;right:18px;background:rgba(255,255,255,.15);color:white;border:none;width:34px;height:34px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.close-bm:hover{background:rgba(255,255,255,.28);}
+.bm-body{padding:36px 44px 50px;}
+.bsec{margin-bottom:32px;}
+.bsec-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.bsec-icon{width:34px;height:34px;background:var(--deep);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.92rem;flex-shrink:0;}
+.bsec-hd h4{font-size:1.1rem;font-weight:700;color:var(--deep);}
+.bsec p{font-size:.95rem;line-height:2;color:#2a2a2a;margin-bottom:10px;}
+.bsec li{font-size:.93rem;line-height:1.9;color:#2a2a2a;margin-bottom:8px;}
+.bsec ul{padding-left:20px;}
+.story-block{background:white;border-radius:12px;padding:22px 26px;border:1px solid var(--border);line-height:2.1;font-size:.95rem;color:#1a1a1a;}
+.story-block p{margin-bottom:14px;}
+.story-block p:last-child{margin-bottom:0;}
+.bm-highlight{background:linear-gradient(135deg,#EFF9FA,#fff);border-left:4px solid var(--teal);border-radius:0 12px 12px 0;padding:18px 22px;font-style:italic;color:var(--teal);font-size:.97rem;margin-top:8px;font-weight:500;line-height:1.8;}
+.myth-card{background:#FFF5F5;border-left:4px solid #D00;border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:12px;font-size:.9rem;}
+.myth-card strong{color:#A00;display:block;margin-bottom:8px;font-size:.92rem;}
+.myth-card .truth{color:#1A6B72;line-height:1.7;}
+.bm-div{height:1px;background:var(--border);margin:28px 0;}
+.bm-nav{display:flex;gap:10px;margin-top:36px;padding-top:26px;border-top:1px solid var(--border);}
+.bm-nav-btn{flex:1;background:var(--deep);color:white;border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:.88rem;transition:background .18s;font-family:'Inter',sans-serif;}
+.bm-nav-btn:hover{background:var(--teal);}
+.bm-nav-btn:disabled{opacity:.25;cursor:not-allowed;}
+.bm-nav-close{background:var(--teal);}
+footer{background:var(--deep);color:rgba(255,255,255,.4);text-align:center;padding:36px 20px;font-size:.82rem;margin-top:60px;}
+footer span{color:var(--gold);}
+@media(max-width:640px){
+  .bm-body{padding:24px 20px 36px;}
+  .bm-hero{padding:28px 22px 24px;}
+  #search-global{width:150px;}
+  #search-global:focus{width:180px;}
+  .hero-stats{gap:24px;}
+  #topbar{padding:0 16px;}
+  .story-block{padding:16px 18px;}
+}
+</style>
+</head>
+  <body>
+<div id="topbar">
+  <a class="logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})">🌙 Quran 30 Para <span>Hinglish Blog</span></a>
+  <div class="topbar-right">
+    <input type="text" id="search-global" placeholder="🔍 Para number, naam ya topic..." oninput="onSearch(this.value)">
+  </div>
+</div>
 
+<section id="hero">
+  <div class="arabic-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <h1>Quran Ke 30 Para</h1>
+  <p class="tagline">Har Para Ki Kahani — Hinglish Mein, Seedhi Dil Tak</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="n">30</div><div class="l">Para / Juz</div></div>
+    <div class="stat"><div class="n">114</div><div class="l">Surahin</div></div>
+    <div class="stat"><div class="n">6236</div><div class="l">Aayatein</div></div>
+    <div class="stat"><div class="n">25+</div><div class="l">Anbia Ki Kahaniyan</div></div>
+  </div>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('paras-sec').scrollIntoView({behavior:'smooth'})">📖 Sab Para Dekho</button>
+  </div>
+</section>
+
+<div id="para-nav">
+  <button class="pnav-btn active" onclick="filterNav('all',this)">Sab</button>
+  <button class="pnav-btn" onclick="filterNav('1',this)">P1</button>
+  <button class="pnav-btn" onclick="filterNav('2',this)">P2</button>
+  <button class="pnav-btn" onclick="filterNav('3',this)">P3</button>
+  <button class="pnav-btn" onclick="filterNav('4',this)">P4</button>
+  <button class="pnav-btn" onclick="filterNav('5',this)">P5</button>
+  <button class="pnav-btn" onclick="filterNav('6',this)">P6</button>
+  <button class="pnav-btn" onclick="filterNav('7',this)">P7</button>
+  <button class="pnav-btn" onclick="filterNav('8',this)">P8</button>
+  <button class="pnav-btn" onclick="filterNav('9',this)">P9</button>
+  <button class="pnav-btn" onclick="filterNav('10',this)">P10</button>
+  <button class="pnav-btn" onclick="filterNav('11',this)">P11</button>
+  <button class="pnav-btn" onclick="filterNav('12',this)">P12</button>
+  <button class="pnav-btn" onclick="filterNav('13',this)">P13</button>
+  <button class="pnav-btn" onclick="filterNav('14',this)">P14</button>
+  <button class="pnav-btn" onclick="filterNav('15',this)">P15</button>
+  <button class="pnav-btn" onclick="filterNav('16',this)">P16</button>
+  <button class="pnav-btn" onclick="filterNav('17',this)">P17</button>
+  <button class="pnav-btn" onclick="filterNav('18',this)">P18</button>
+  <button class="pnav-btn" onclick="filterNav('19',this)">P19</button>
+  <button class="pnav-btn" onclick="filterNav('20',this)">P20</button>
+  <button class="pnav-btn" onclick="filterNav('21',this)">P21</button>
+  <button class="pnav-btn" onclick="filterNav('22',this)">P22</button>
+  <button class="pnav-btn" onclick="filterNav('23',this)">P23</button>
+  <button class="pnav-btn" onclick="filterNav('24',this)">P24</button>
+  <button class="pnav-btn" onclick="filterNav('25',this)">P25</button>
+  <button class="pnav-btn" onclick="filterNav('26',this)">P26</button>
+  <button class="pnav-btn" onclick="filterNav('27',this)">P27</button>
+  <button class="pnav-btn" onclick="filterNav('28',this)">P28</button>
+  <button class="pnav-btn" onclick="filterNav('29',this)">P29</button>
+  <button class="pnav-btn" onclick="filterNav('30',this)">P30</button>
+</div>
+
+<div id="main">
+  <div class="sec-head" id="paras-sec">
+    <h2>Tammam 30 Para — Ek Nazar Mein</h2>
+    <p>Kisi bhi para par click karo — poori kahani, kirdar, sabak aur myths padhne ko milein</p>
+    <div class="sec-line"></div>
+  </div>
+  <div class="search-info" id="search-info"></div>
+  <div id="para-grid"></div>
+</div>
+
+<div id="blog-modal">
+  <div class="bm-inner">
+    <div class="bm-hero">
+      <button class="close-bm" onclick="closeBlog()">✕</button>
+      <div class="bm-badge" id="bm-num">Para 1</div>
+      <h2 id="bm-title"></h2>
+      <div class="bmsub" id="bm-sub"></div>
+    </div>
+    <div class="bm-body" id="bm-body"></div>
+  </div>
+</div>
+
+<footer>
+  🌙 Quran Ke 30 Para — Banaya gaya hai <span>seekhne aur samajhne</span> ke liye &nbsp;|&nbsp; Quran Ki Baat, Dil Ki Zuban Mein
+</footer>
+    
